@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="myImg" src="">
+    <img id="myNewImg" src="">
+
+    <!-- Tradicional version -->
+    <script>
+        fetch('https://dog.ceo/api/breed/boxer/images/random')
+            .then(res => res.json()) // aguardar a resposta do servidor
+                .then(json => document.getElementById("myImg").src=json.message) // extrair payload json
+    </script>
+
+    <!-- ES2017 version-->
+    <script>
+        async function fetchDog(){
+            try{
+                const response = await fetch('https://dog.ceo/api/breed/boxer/images/random')
+                const jsonData = await response.json()
+                document.getElementById("myNewImg").src=jsonData.message
+            } catch(e){
+                alert(e)
+            }
+        }
+
+        fetchDog()
+    </script>
+</body>
+</html>
